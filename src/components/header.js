@@ -1,14 +1,20 @@
 import React from 'react';
-import Navbar from './navbar';
-const Header = () => {
+import Navbar from './Navbar';
+import { withRouter, Link } from 'react-router-dom';
+
+const TabLink = ({ to, children, location }) => (
+	<li className={`${location.pathname === to ? 'is-active':' '}`}>
+		<Link to={to}>{children}</Link>
+	</li>
+);
+
+const Header = ({ location }) => {
 	return (
-		<section className="hero is-primary">
-			{/* <!-- Hero head: will stick at the top --> */}
+		<section className="hero is-primary is-small">
 			<div className="hero-head">
 				<Navbar />
 			</div>
 
-			{/* <!-- Hero content: will be in the middle --> */}
 			<div className="hero-body">
 				<div className="container has-text-centered">
 					<h1 className="title">Another Hand</h1>
@@ -16,23 +22,22 @@ const Header = () => {
 				</div>
 			</div>
 
-			{/* <!-- Hero footer: will stick at the bottom --> */}
 			<div className="hero-foot">
 				<nav className="tabs is-boxed is-centered">
 					<div className="container">
 						<ul className="is-center">
-							<li>
-								<a>Overview</a>
-							</li>
-							<li className="is-active">
-								<a>Messenger</a>
-							</li>
-							<li>
-								<a>Order</a>
-							</li>
-							<li>
-								<a>Product</a>
-							</li>
+							<TabLink to="/" location={location}>
+								Overview
+							</TabLink>
+							<TabLink to="/messenger" location={location}>
+								Messenger
+							</TabLink>
+							<TabLink to="/order" location={location}>
+								Order
+							</TabLink>
+							<TabLink to="/product" location={location}>
+								Product
+							</TabLink>
 						</ul>
 					</div>
 				</nav>
@@ -41,4 +46,4 @@ const Header = () => {
 	);
 };
 
-export default Header;
+export default withRouter(Header);
