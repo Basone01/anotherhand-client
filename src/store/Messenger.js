@@ -18,12 +18,18 @@ class Messenger {
 				pageId: this.pageId,
 				token: this.token
 			}).then((res) => {
-				this.conversations.push(...res);
+				this.conversations.replace(res);
 			});
+			this.sortConversationByTime();
+
 			console.log('Fetch Messages done');
 		} catch (error) {
 			console.log('Fetch Messages failed');
 		}
+	}
+
+	sortConversationByTime() {
+		this.conversations.replace(this.conversations.slice().sort((a, b) => b.time - a.time));
 	}
 
 	onMessageRecieved = async (message) => {
@@ -44,9 +50,10 @@ class Messenger {
 			});
 			this.conversations.unshift({ ...profile, ...message });
 		}
+		this.sortConversationByTime();
 	};
 	get timeBasedConversations() {
-		return this.conversations.sort((a, b) => b.time - a.time);
+		return this.conversations;
 	}
 }
 decorate(Messenger, {

@@ -6,6 +6,7 @@ import 'bulma/css/bulma.min.css';
 import './styles/helpers.css';
 import { Provider } from 'mobx-react';
 import RootStore from './store';
+import { BrowserRouter } from 'react-router-dom';
 ReactDOM.render(
 	<Provider
 		Product={RootStore.ProductStore}
@@ -13,8 +14,15 @@ ReactDOM.render(
 		Messenger={RootStore.MessengerStore}
 		Shop={RootStore.ShopStore}
 	>
-		<App />
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
 	</Provider>,
 	document.getElementById('root')
 );
+
+if (module.hot) {
+	module.hot.accept();
+}
+
 registerServiceWorker();
