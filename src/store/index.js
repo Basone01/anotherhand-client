@@ -3,6 +3,7 @@ import AppState from './AppState';
 import Product from './Product';
 import Messenger from './Messenger';
 import Shop from './Shop';
+import { observer, inject } from 'mobx-react';
 
 class RootStore {
 	AppStateStore = null;
@@ -38,3 +39,5 @@ class RootStore {
 }
 
 export default new RootStore(AppState, Product, Messenger, Shop);
+
+export const enhance = (component, ...store) => inject(...store)(observer(component));
