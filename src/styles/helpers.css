@@ -1,27 +1,44 @@
 .flex,
+.flex-center,
+.flex-row-center {
+	display: flex;
+}
+.flex,
 .flex-center {
-    display: flex;
-    flex-direction: column;
+	flex-direction: column;
 }
 
 .flex-center {
-    align-items: center;
+	align-items: center;
+}
+
+.flex-row-center{
+	align-items: center;
 }
 
 .flex-grow {
-    flex-grow: 1;
+	flex-grow: 1;
 }
 
 .flex-expand {
-    flex-grow: 1;
-    align-self: stretch;
+	flex-grow: 1;
+	align-self: stretch;
+}
+
+.img {
+	object-fit: cover;
+	object-position: center;
+}
+
+.img-rounded {
+	border-radius: 50%;
 }
 
 @media screen and (min-width: 1088px) {
-    .flex-mobile-block {
-        align-self: stretch;
-    }
-    .flex>.container {
-        margin: 0 auto;
-    }
+	.flex-mobile-block {
+		align-self: stretch;
+	}
+	.flex > .container {
+		margin: 0 auto;
+	}
 }
