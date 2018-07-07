@@ -10,6 +10,7 @@ ReactDOM.render(
 		Product={RootStore.ProductStore}
 		AppState={RootStore.AppStateStore}
 		Messenger={RootStore.MessengerStore}
+		Shop={RootStore.ShopStore}
 	>
 		<App />
 	</Provider>,
