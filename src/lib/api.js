@@ -13,7 +13,7 @@ export const getMessages = ({ pageId, token }) =>
 		})
 		.then((res) => res.data);
 
-export const getConversationProfile = ({ pageId, token, customer_id }) =>
+export const getFacebookProfile = ({ pageId, token, customer_id }) =>
 	axios
 		.post(ENDPOINT + '/api/conversation/profile', {
 			fb_page_id: pageId,

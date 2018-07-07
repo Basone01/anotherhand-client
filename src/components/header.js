@@ -1,14 +1,12 @@
 import React from 'react';
-import Navbar from './navbar';
+import Navbar from './Navbar';
 const Header = () => {
 	return (
-		<section className="hero is-primary">
-			{/* <!-- Hero head: will stick at the top --> */}
+		<section className="hero is-primary is-small">
 			<div className="hero-head">
 				<Navbar />
 			</div>
 
-			{/* <!-- Hero content: will be in the middle --> */}
 			<div className="hero-body">
 				<div className="container has-text-centered">
 					<h1 className="title">Another Hand</h1>
@@ -16,7 +14,6 @@ const Header = () => {
 				</div>
 			</div>
 
-			{/* <!-- Hero footer: will stick at the bottom --> */}
 			<div className="hero-foot">
 				<nav className="tabs is-boxed is-centered">
 					<div className="container">

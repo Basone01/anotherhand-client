@@ -1,5 +1,5 @@
 import { observable, action, decorate, computed } from 'mobx';
-import { getMessages, getConversationProfile } from '../lib/api';
+import { getMessages, getFacebookProfile } from '../lib/api';
 class Messenger {
 	conversations = [];
 	currentConversationID = null;
@@ -37,7 +37,7 @@ class Messenger {
 			}
 		});
 		if (!exist) {
-			const profile = await getConversationProfile({
+			const profile = await getFacebookProfile({
 				customer_id: message.customer_id,
 				pageId: this.pageId,
 				token: this.token

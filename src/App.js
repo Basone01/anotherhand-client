@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Header from './components/header';
-import Main from './components/main';
+import Header from './components/Header';
+import ContentLayout from './components/ContentLayout';
+import Messenger from './components/Messenger/index';
+
 class App extends Component {
 	render() {
 		return (
@@ -8,11 +10,14 @@ class App extends Component {
 				style={{
 					display: 'flex',
 					flexDirection: 'column',
-					minHeight: '100vh'
+					minHeight: '100vh',
+					minWidth: 420
 				}}
 			>
 				<Header />
-				<Main style={{ flexGrow: 1 }} />
+				<ContentLayout>
+					<Messenger />
+				</ContentLayout>
 			</div>
 		);
 	}
