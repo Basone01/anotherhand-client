@@ -5,16 +5,18 @@ class Shop {
 	pageId = '';
 	shopId = '';
 	token = '';
+	profilePic = '';
 
 	async getShopInformation() {
 		console.log('Fetching Shop Information');
 		try {
 			await getShopInformation().then((res) => {
-				const { name, fb_page_id, id, _id, fb_page_token } = res;
+				const { name, fb_page_id, _id, fb_page_token, picture } = res;
 				this.name = name;
 				this.pageId = fb_page_id;
 				this.shopId = _id;
 				this.token = fb_page_token;
+				this.profilePic = picture;
 			});
 			console.log('Fetch Shop Information done');
 		} catch (error) {
@@ -23,7 +25,9 @@ class Shop {
 	}
 }
 decorate(Shop, {
-	getShopInformation: action
+	getShopInformation: action,
+	name:observable,
+	profilePic:observable
 });
 
 export default new Shop();
