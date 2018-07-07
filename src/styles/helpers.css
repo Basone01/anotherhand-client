@@ -1,0 +1,27 @@
+.flex,
+.flex-center {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-center {
+    align-items: center;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}
+
+.flex-expand {
+    flex-grow: 1;
+    align-self: stretch;
+}
+
+@media screen and (min-width: 1088px) {
+    .flex-mobile-block {
+        align-self: stretch;
+    }
+    .flex>.container {
+        margin: 0 auto;
+    }
+}
