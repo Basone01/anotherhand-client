@@ -14,17 +14,17 @@ class RootStore {
 		this.ProductStore = ProductStore;
 		this.MessengerStore = MessengerStore;
 		this.ShopStore = ShopStore;
-
 		this.initApp();
 	}
 
 	async initApp() {
 		await this.ShopStore.getShopInformation();
 		await this.ProductStore.getAllProducts();
-		await this.MessengerStore.getMessages(
-			this.ShopStore.pageId,
-			this.ShopStore.token
-		);
+		await this.MessengerStore.initFacebookAccessData({
+			pageId: this.ShopStore.pageId,
+			token: this.ShopStore.token
+		});
+		await this.MessengerStore.getMessages();
 		this.initSocket();
 	}
 

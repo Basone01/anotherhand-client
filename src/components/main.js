@@ -6,7 +6,7 @@ const renderLastMessage = (conversation) => {
 	const lastMessage = lastMessaging.message
 		? lastMessaging.message.text
 		: lastMessaging.postback.title;
-	return lastMessage;
+	return lastMessage.length > 20 ? lastMessage.slice(0, 20) + '...' : lastMessage;
 };
 
 const Main = ({ style, Messenger }) => {
@@ -15,12 +15,28 @@ const Main = ({ style, Messenger }) => {
 			<div className="container">
 				<div className="columns">
 					<div className="box column is-narrow has-text-centered is-marginless">
-						{Messenger.conversations.map((conversation) => (
+						{Messenger.timeBasedConversations.map((conversation) => (
 							<div className="box is-marginless is-radiusless" key={conversation.customer_id}>
-								<div>
-									{conversation.first_name} {conversation.last_name}
+								<div style={{ display: 'flex', alignItems: 'center' }}>
+									<img
+										src={conversation.profile_pic}
+										alt=""
+										style={{
+											objectFit: 'cover',
+											objectPosition: 'center',
+											width: 48,
+											height: 48,
+											borderRadius: '50%',
+											marginRight: '1em'
+										}}
+									/>
+									<span>
+										<div className="has-text-weight-bold">
+											{conversation.first_name} {conversation.last_name}
+										</div>
+										<div className="has-text-left">{renderLastMessage(conversation)}</div>
+									</span>
 								</div>
-								<div>{renderLastMessage(conversation)}</div>
 							</div>
 						))}
 					</div>
