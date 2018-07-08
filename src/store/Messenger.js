@@ -21,12 +21,19 @@ class Messenger {
 				this.conversations.replace(res);
 			});
 			this.sortConversationByTime();
+			if (this.conversations) {
+				this.currentConversationID = this.conversations[0].customer_id;
+			}
 
 			console.log('Fetch Messages done');
 		} catch (error) {
 			console.log('Fetch Messages failed');
 		}
 	}
+
+	setCurrentConversation = (id) => {
+		this.currentConversationID = id;
+	};
 
 	sortConversationByTime() {
 		this.conversations.replace(this.conversations.slice().sort((a, b) => b.time - a.time));
@@ -59,6 +66,7 @@ class Messenger {
 decorate(Messenger, {
 	onMessageRecieved: action,
 	getMessages: action,
+	setCurrentConversation: action,
 	conversations: observable,
 	currentConversationID: observable,
 	timeBasedConversations: computed
