@@ -40,4 +40,4 @@ class RootStore {
 
 export default new RootStore(AppState, Product, Messenger, Shop);
 
-export const enhance = (component, ...store) => inject(...store)(observer(component));
+export const withStore = (component, ...store) => inject(...store)(observer(component));

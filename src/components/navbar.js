@@ -1,5 +1,5 @@
 import React from 'react';
-import { enhance } from '../store/index';
+import { withStore } from '../store/index';
 const Logo = ({ children }) => (
 	<div className="navbar-brand">
 		<a className="navbar-item has-text-weight-bold">{children}</a>
@@ -43,4 +43,4 @@ const Navbar = ({ Shop }) => {
 	);
 };
 
-export default enhance(Navbar, 'Shop');
+export default withStore(Navbar, 'Shop');
