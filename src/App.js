@@ -9,17 +9,30 @@ class App extends Component {
 			<div
 				className="flex"
 				style={{
-					minHeight: '100vh',
+					height: '100vh',
+					// maxHeight: '100vh',
 					minWidth: 420
 				}}
 			>
 				<Header />
 				<ContentLayout>
 					<Switch>
-						<Route path="/" exact component={() => <span>Overview</span>} />
+						<Route
+							path="/"
+							exact
+							component={() => <div className="container has-text-centered">Overview</div>}
+						/>
 						<Route path="/messenger" exact component={Messenger} />
-						<Route path="/order" exact component={() => <span>Order</span>} />
-						<Route path="/product" exact component={() => <span>Product</span>} />
+						<Route
+							path="/order"
+							exact
+							component={() => <div className="container has-text-centered">Order</div>}
+						/>
+						<Route
+							path="/product"
+							exact
+							component={() => <div className="container has-text-centered">Product</div>}
+						/>
 						<Redirect to="/messenger" />
 					</Switch>
 				</ContentLayout>
