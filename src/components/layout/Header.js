@@ -3,14 +3,14 @@ import Navbar from './Navbar';
 import { withRouter, Link } from 'react-router-dom';
 
 const TabLink = ({ to, children, location }) => (
-	<li className={`${location.pathname === to ? 'is-active':' '}`}>
+	<li className={`has-text-weight-bold ${location.pathname === to ? 'is-active':' '}`}>
 		<Link to={to}>{children}</Link>
 	</li>
 );
 
 const Header = ({ location }) => {
 	return (
-		<section className="hero is-primary is-small">
+		<section className="hero is-link is-small">
 			<div className="hero-head">
 				<Navbar />
 			</div>

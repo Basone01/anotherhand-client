@@ -1,7 +1,12 @@
 import { observable, action, decorate } from 'mobx';
 import { getAllProducts } from '../lib/api';
 class Product {
+	rootStore;
 	products = [];
+
+	constructor(rootStore) {
+		this.rootStore=rootStore;
+	}
 
 	getAllProducts = async () => {
 		console.log('Fetching products');
@@ -20,4 +25,4 @@ decorate(Product, {
 	getAllProducts: action
 });
 
-export default new Product();
+export default Product;

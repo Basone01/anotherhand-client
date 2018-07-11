@@ -1,10 +1,16 @@
 import { observable, action, decorate, computed } from 'mobx';
-import { getMessages, getFacebookProfile } from '../lib/api';
+import { getMessages, getFacebookProfile,sendMessage } from '../lib/api';
+
 class Messenger {
+	rootStore;
 	conversations = [];
 	currentConversationID = null;
 	token = '';
 	pageId = '';
+
+	constructor(rootStore) {
+		this.rootStore = rootStore;
+	}
 
 	initFacebookAccessData({ token, pageId }) {
 		this.pageId = pageId;
@@ -14,20 +20,22 @@ class Messenger {
 	async getMessages() {
 		console.log('Fetching Messages');
 		try {
-			await getMessages({
+			const messages = await getMessages({
 				pageId: this.pageId,
 				token: this.token
-			}).then((res) => {
-				this.conversations.replace(res);
 			});
-			this.sortConversationByTime();
-			if (this.conversations) {
-				this.currentConversationID = this.conversations[0].customer_id;
+			if (messages.length) {
+				this.conversations.replace(messages);
+				this.sortConversationByTime();
+				if (this.conversations) {
+					this.currentConversationID = this.conversations[0].customer_id;
+				}
 			}
 
 			console.log('Fetch Messages done');
 		} catch (error) {
 			console.log('Fetch Messages failed');
+			console.log(error.message);
 		}
 	}
 
@@ -62,6 +70,14 @@ class Messenger {
 	get timeBasedConversations() {
 		return this.conversations;
 	}
+
+	sendMessage = (message) => {
+		sendMessage({
+			customer_id: this.currentConversationID,
+			token: this.rootStore.ShopStore.token,
+			message: message
+		});
+	};
 }
 decorate(Messenger, {
 	onMessageRecieved: action,
@@ -72,4 +88,4 @@ decorate(Messenger, {
 	timeBasedConversations: computed
 });
 
-export default new Messenger();
+export default Messenger;

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Header from './components/Header';
-import ContentLayout from './components/ContentLayout';
+import Header from './components/layout/Header';
+import ContentLayout from './components/layout/ContentLayout';
 import Messenger from './components/Messenger/index';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { withStore } from './store';
 class App extends Component {
 	render() {
 		return (
@@ -10,7 +11,6 @@ class App extends Component {
 				className="flex"
 				style={{
 					height: '100vh',
-					// maxHeight: '100vh',
 					minWidth: 420
 				}}
 			>

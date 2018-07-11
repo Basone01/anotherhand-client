@@ -4,19 +4,15 @@ import Avatar from '../common/Avatar';
 const renderLastMessage = (conversation, pageId) => {
 	const lastMessaging = conversation.messaging[conversation.messaging.length - 1];
 	let lastMessage = '';
-	console.log(lastMessaging);
 	if (lastMessaging.message) {
 		if (lastMessaging.message.postback) {
 			lastMessage = lastMessaging.postback.title;
-			console.log('pb', lastMessage);
 		}
 		else if (lastMessaging.message.attachments) {
 			lastMessage = 'An attachment';
-			console.log('at', lastMessage);
 		}
 		else {
 			lastMessage = lastMessaging.message.text;
-			console.log('t', lastMessage);
 		}
 	}
 	else {

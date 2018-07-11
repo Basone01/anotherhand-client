@@ -1,11 +1,16 @@
 import { observable, action, decorate } from 'mobx';
 import { getShopInformation } from '../lib/api';
 class Shop {
+	rootStore;
 	name = '';
 	pageId = '';
 	shopId = '';
 	token = '';
 	profilePic = '';
+
+	constructor(rootStore) {
+		this.rootStore=rootStore;
+	}
 
 	async getShopInformation() {
 		console.log('Fetching Shop Information');
@@ -30,4 +35,4 @@ decorate(Shop, {
 	profilePic:observable
 });
 
-export default new Shop();
+export default Shop;

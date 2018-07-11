@@ -1,8 +1,8 @@
 import { initalizeSocket } from '../lib/socket';
-import AppState from './AppState';
-import Product from './Product';
-import Messenger from './Messenger';
-import Shop from './Shop';
+import AppStateStore from './AppState';
+import ProductStore from './Product';
+import MessengerStore from './Messenger';
+import ShopStore from './Shop';
 import { observer, inject } from 'mobx-react';
 
 class RootStore {
@@ -10,11 +10,11 @@ class RootStore {
 	ProductStore = null;
 	ShopStore = null;
 	socket = null;
-	constructor(AppStateStore, ProductStore, MessengerStore, ShopStore) {
-		this.AppStateStore = AppStateStore;
-		this.ProductStore = ProductStore;
-		this.MessengerStore = MessengerStore;
-		this.ShopStore = ShopStore;
+	constructor() {
+		this.AppStateStore = new AppStateStore(this);
+		this.ProductStore = new ProductStore(this);
+		this.MessengerStore = new MessengerStore(this);
+		this.ShopStore = new ShopStore(this);
 		this.initApp();
 	}
 
@@ -38,6 +38,6 @@ class RootStore {
 	}
 }
 
-export default new RootStore(AppState, Product, Messenger, Shop);
+export default new RootStore();
 
 export const withStore = (component, ...store) => inject(...store)(observer(component));

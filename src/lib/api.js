@@ -21,3 +21,10 @@ export const getFacebookProfile = ({ pageId, token, customer_id }) =>
 			customer_id: customer_id
 		})
 		.then((res) => res.data);
+
+export const sendMessage = ({ customer_id, token, message }) =>
+	axios.post(ENDPOINT + '/api/conversation/send/message', {
+		customer_id: customer_id,
+		fb_page_token: token,
+		message: message
+	});
