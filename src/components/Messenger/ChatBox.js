@@ -71,7 +71,25 @@ class ChatBox extends Component {
 										src={isCustomerMessage ? currentConversation.profile_pic : Shop.profilePic}
 										style={{ margin: '2px 6px' }}
 									/>
-									<span>{msg.message.text || `( This is an Attachment )`}</span>
+									{msg.message.text && <span>{msg.message.text}</span>}
+									{msg.message.attachments && (
+										<div>
+											{msg.message.attachments.map((attachment) => {
+												if (attachment.type == 'image') {
+													return (
+														`<img
+															src={attachment.payload.url}
+															alt="attachment picture"
+															style={{ maxWidth: 64 }}
+														/>`
+													);
+												}
+												else {
+													return '';
+												}
+											})}
+										</div>
+									)}
 								</div>
 							);
 						})}
