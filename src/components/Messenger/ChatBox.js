@@ -52,47 +52,44 @@ class ChatBox extends Component {
 					)}
 					<span className="has-text-weight-bold">{Title}</span>
 				</div>
-				<div
-					className="box has-text-weight-bold has-text-centered flex-grow is-radiusless styled-scrollbar is-marginless"
-					style={{ overflowY: 'scroll' }}
-				>
-					{currentConversation &&
-						currentConversation.messaging.map((msg) => {
-							const isCustomerMessage = msg.sender.id === currentConversation.customer_id;
-							return (
-								<div
-									key={msg.timestamp}
-									className={`has-text-${isCustomerMessage
-										? 'left'
-										: 'right'} appear-zoom flex-row-center `}
-									style={{ flexDirection: !isCustomerMessage && 'row-reverse' }}
-								>
-									<Avatar
-										src={isCustomerMessage ? currentConversation.profile_pic : Shop.profilePic}
-										style={{ margin: '2px 6px' }}
-									/>
-									{msg.message.text && <span>{msg.message.text}</span>}
-									{msg.message.attachments && (
-										<div>
-											{msg.message.attachments.map((attachment) => {
-												if (attachment.type == 'image') {
-													return (
-														`<img
+				<div className="box has-text-weight-bold has-text-centered flex-grow is-radiusless is-marginless is-paddingless flex">
+					<div className=" styled-scrollbar" style={{ overflowY: 'auto' }}>
+						{currentConversation &&
+							currentConversation.messaging.map((msg) => {
+								const isCustomerMessage = msg.sender.id === currentConversation.customer_id;
+								return (
+									<div
+										key={msg.timestamp}
+										className={`has-text-${isCustomerMessage
+											? 'left'
+											: 'right'} appear-zoom flex-row-center `}
+										style={{ flexDirection: !isCustomerMessage && 'row-reverse', flexShrink: 0 }}
+									>
+										<Avatar
+											src={isCustomerMessage ? currentConversation.profile_pic : Shop.profilePic}
+											style={{ margin: '2px 6px' }}
+										/>
+										{msg.message.text && <span>{msg.message.text}</span>}
+										{msg.message.attachments && (
+											<div>
+												{msg.message.attachments.map((attachment) => {
+													if (attachment.type === 'image') {
+														return `<img
 															src={attachment.payload.url}
 															alt="attachment picture"
 															style={{ maxWidth: 64 }}
-														/>`
-													);
-												}
-												else {
-													return '';
-												}
-											})}
-										</div>
-									)}
-								</div>
-							);
-						})}
+														/>`;
+													}
+													else {
+														return '';
+													}
+												})}
+											</div>
+										)}
+									</div>
+								);
+							})}
+					</div>
 				</div>
 
 				{currentConversation && (

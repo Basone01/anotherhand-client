@@ -1,13 +1,12 @@
 import axios from 'axios';
-const ENDPOINT = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_API : '';
-export const getAllProducts = () => axios.get(ENDPOINT + '/api/products').then((res) => res.data);
+export const getAllProducts = () => axios.get('/api/products').then((res) => res.data);
 
 export const getShopInformation = () =>
-	axios.get(ENDPOINT + '/api/shop/' + process.env.REACT_APP_DEV_SHOP_ID).then((res) => res.data);
+	axios.get('/api/shop/' + process.env.REACT_APP_DEV_SHOP_ID).then((res) => res.data);
 
 export const getMessages = ({ pageId, token }) =>
 	axios
-		.post(ENDPOINT + '/api/conversations/', {
+		.post('/api/conversations/', {
 			fb_page_id: pageId,
 			fb_page_token: token
 		})
@@ -15,7 +14,7 @@ export const getMessages = ({ pageId, token }) =>
 
 export const getFacebookProfile = ({ pageId, token, customer_id }) =>
 	axios
-		.post(ENDPOINT + '/api/conversation/profile', {
+		.post('/api/conversation/profile', {
 			fb_page_id: pageId,
 			fb_page_token: token,
 			customer_id: customer_id
@@ -23,7 +22,7 @@ export const getFacebookProfile = ({ pageId, token, customer_id }) =>
 		.then((res) => res.data);
 
 export const sendMessage = ({ customer_id, token, message }) =>
-	axios.post(ENDPOINT + '/api/conversation/send/message', {
+	axios.post('/api/conversation/send/message', {
 		customer_id: customer_id,
 		fb_page_token: token,
 		message: message
