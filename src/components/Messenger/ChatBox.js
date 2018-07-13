@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withStore } from '../../store';
 import Avatar from '../common/Avatar';
+import MessageList from './MessageList';
+import MessageInput from './MessageInput';
 
 class ChatBox extends Component {
 	state = {
@@ -40,7 +42,6 @@ class ChatBox extends Component {
 	};
 
 	render() {
-		const { Shop } = this.props;
 		const { message } = this.state;
 		const { Title = '', currentConversation = null } = this.getCurrentConversation();
 
@@ -52,65 +53,20 @@ class ChatBox extends Component {
 					)}
 					<span className="has-text-weight-bold">{Title}</span>
 				</div>
-				<div className="box has-text-weight-bold has-text-centered flex-grow is-radiusless is-marginless is-paddingless flex">
-					<div className=" styled-scrollbar" style={{ overflowY: 'auto' }}>
-						{currentConversation &&
-							currentConversation.messaging.map((msg) => {
-								const isCustomerMessage = msg.sender.id === currentConversation.customer_id;
-								return (
-									<div
-										key={msg.timestamp}
-										className={`has-text-${isCustomerMessage
-											? 'left'
-											: 'right'} appear-zoom flex-row-center `}
-										style={{ flexDirection: !isCustomerMessage && 'row-reverse', flexShrink: 0 }}
-									>
-										<Avatar
-											src={isCustomerMessage ? currentConversation.profile_pic : Shop.profilePic}
-											style={{ margin: '2px 6px' }}
-										/>
-										{msg.message.text && <span>{msg.message.text}</span>}
-										{msg.message.attachments && (
-											<div>
-												{msg.message.attachments.map((attachment) => {
-													if (attachment.type === 'image') {
-														return `<img
-															src={attachment.payload.url}
-															alt="attachment picture"
-															style={{ maxWidth: 64 }}
-														/>`;
-													}
-													else {
-														return '';
-													}
-												})}
-											</div>
-										)}
-									</div>
-								);
-							})}
-					</div>
-				</div>
 
+				{currentConversation && <MessageList conversation={currentConversation} />}
 				{currentConversation && (
-					<div className="field">
-						<div className="control">
-							<input
-								className="input"
-								type="text"
-								placeholder="Enter some message"
-								value={message}
-								onChange={this.handleInputChage}
-								onKeyUp={this.handleEnter}
-							/>
-						</div>
-					</div>
+					<MessageInput
+						value={message}
+						onChange={this.handleInputChage}
+						onKeyUp={this.handleEnter}
+					/>
 				)}
 			</div>
 		);
 	}
 }
 
-export const ChatBoxWithStore = withStore(ChatBox, 'Messenger', 'Shop');
+export const ChatBoxWithStore = withStore(ChatBox, 'Messenger');
 
 export default ChatBoxWithStore;

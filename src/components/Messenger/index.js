@@ -8,7 +8,11 @@ const Messenger = (props) => {
 		<div className="is-marginless is-radiusless box columns flex-grow">
 			<div
 				className="column is-narrow box has-text-centered is-marginless styled-scrollbar"
-				style={{ minWidth: 320, overflowY: 'scroll' }}
+				style={{
+					width: 320,
+					overflowY: 'scroll',
+					overflowX: 'hidden'
+				}}
 			>
 				<ChatList />
 			</div>

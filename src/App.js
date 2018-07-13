@@ -3,7 +3,7 @@ import Header from './components/layout/Header';
 import ContentLayout from './components/layout/ContentLayout';
 import Messenger from './components/Messenger/index';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { withStore } from './store';
+import ProductManager from './components/ProductManager';
 class App extends Component {
 	render() {
 		return (
@@ -31,7 +31,7 @@ class App extends Component {
 						<Route
 							path="/product"
 							exact
-							component={() => <div className="container has-text-centered">Product</div>}
+							component={ProductManager}
 						/>
 						<Redirect to="/messenger" />
 					</Switch>

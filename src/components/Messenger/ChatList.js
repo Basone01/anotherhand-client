@@ -21,7 +21,7 @@ const renderLastMessage = (conversation, pageId) => {
 	if (lastMessaging.sender.id === pageId) {
 		lastMessage = '> ' + lastMessage;
 	}
-	return lastMessage;
+	return lastMessage.slice(0, 18);
 };
 
 export const ChatList = ({ Messenger }) => (

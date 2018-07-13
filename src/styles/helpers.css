@@ -33,6 +33,11 @@
 	object-position: center;
 }
 
+.img-contain {
+	object-fit: contain;
+	object-position: center;
+}
+
 .img-rounded {
 	border-radius: 50%;
 }

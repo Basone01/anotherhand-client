@@ -17,8 +17,8 @@ const Header = ({ location }) => {
 
 			<div className="hero-body">
 				<div className="container has-text-centered">
-					<h1 className="title">Another Hand</h1>
-					<h2 className="subtitle">If 2 isn't enough, let's try 3</h2>
+					{/* <h1 className="title">Another Hand</h1> */}
+					{/* <h2 className="subtitle">If 2 isn't enough, let's try 3</h2> */}
 				</div>
 			</div>
 
