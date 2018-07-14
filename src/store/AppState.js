@@ -1,8 +1,13 @@
 import { observable, decorate } from 'mobx';
 class AppState {
+	rootStore;
 	isSpinnerDisplay = false;
+
+	constructor(rootStore) {
+		this.rootStore=rootStore;
+	}
 }
 decorate(AppState, {
 	isSpinnerDisplay: observable
 });
-export default new AppState();
+export default AppState;

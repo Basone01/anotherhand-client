@@ -1,6 +1,7 @@
 .flex,
 .flex-center,
-.flex-row-center {
+.flex-row-center,
+.flex-center-all {
 	display: flex;
 }
 .flex,
@@ -8,12 +9,14 @@
 	flex-direction: column;
 }
 
-.flex-center {
+.flex-center,
+.flex-center-all,
+.flex-row-center {
 	align-items: center;
 }
 
-.flex-row-center{
-	align-items: center;
+.flex-center-all,.flex-row-center-all {
+	justify-content: center;
 }
 
 .flex-grow {
@@ -30,6 +33,11 @@
 	object-position: center;
 }
 
+.img-contain {
+	object-fit: contain;
+	object-position: center;
+}
+
 .img-rounded {
 	border-radius: 50%;
 }
@@ -41,4 +49,48 @@
 	.flex > .container {
 		margin: 0 auto;
 	}
+}
+
+@keyframes scale {
+	from {
+		-webkit-transform: scale(0);
+		transform: scale(0);
+	}
+	to {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+
+.appear-zoom {
+	animation: scale 0.25s ease-out;
+}
+
+.styled-scrollbar::-webkit-scrollbar {
+	width: 8px;
+}
+
+/* Track */
+.styled-scrollbar::-webkit-scrollbar-track {
+	background: #f1f1f1;
+	border-radius: 4px;
+}
+
+/* Handle */
+.styled-scrollbar::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 4px;
+}
+
+/* Handle on hover */
+.styled-scrollbar::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+.hoverable{
+	cursor: pointer;
+}
+
+.hoverable:hover{
+	opacity: 0.5;
 }
