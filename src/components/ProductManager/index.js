@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { withStore } from '../../store';
 import ProductList from './ProductList';
+import FilterPanel from './FilterPanel';
 
 const ProductManager = ({ Product }) => {
 	return (
@@ -15,7 +16,7 @@ const ProductManager = ({ Product }) => {
 				className="columns is-marginless is-paddingless is-radiusless box has-text-centered flex-grow"
 				style={{ flexBasis: 0 }}
 			>
-				<div className="column box is-marginless is-radiusless is-one-fifth is-narrow">Filter</div>
+				<FilterPanel />
 				<ProductList />
 			</div>
 		</Fragment>

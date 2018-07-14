@@ -6,7 +6,7 @@ const ProductList = ({ Product }) => {
 	return (
 		<div className="column box is-marginless is-radiusless columns is-paddingless" style={{ flexBasis: 0 }}>
 			<div className="styled-scrollbar column is-marginless" style={{ overflowY: 'auto' }}>
-				{Product.products.map((product) => <ProductItem key={product._id} product={product} />)}
+				{Product.filteredProducts.map((product) => <ProductItem key={product._id} product={product} />)}
 			</div>
 		</div>
 	);

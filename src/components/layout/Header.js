@@ -15,13 +15,13 @@ const Header = ({ location }) => {
 				<Navbar />
 			</div>
 
-			<div className="hero-body">
+			{/* <div className="hero-body">
 				<div className="container has-text-centered">
-					{/* <h1 className="title">Another Hand</h1> */}
-					{/* <h2 className="subtitle">If 2 isn't enough, let's try 3</h2> */}
+					<h1 className="title">Another Hand</h1>
+					<h2 className="subtitle">If 2 isn't enough, let's try 3</h2>
 				</div>
-			</div>
-
+			</div> */}
+	
 			<div className="hero-foot">
 				<nav className="tabs is-boxed is-centered">
 					<div className="container">
