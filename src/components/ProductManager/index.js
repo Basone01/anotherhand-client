@@ -6,9 +6,49 @@ import FilterPanel from './FilterPanel';
 const ProductManager = ({ Product }) => {
 	return (
 		<Fragment>
-			<div className="columns is-marginless is-paddingless is-radiusless box has-text-centered">
-				<div className="column box is-marginless is-radiusless is-one-fifth">Filter</div>
-				<div className="column box is-marginless is-radiusless ">Sort</div>
+			<div className="columns is-marginless is-paddingless is-radiusless box has-text-centered has-text-weight-semibold">
+				<div
+					className="column box is-marginless is-radiusless is-one-fifth"
+					style={{ minWidth: 240 }}
+				>
+					Filter
+				</div>
+				<div className="column columns box is-marginless is-radiusless">
+					<div className="column is-paddingless is-flex">
+						<select
+							className="has-text-weight-semibold"
+							style={{
+								flex: 1,
+								alignSelf: 'stretch',
+								border: 'none',
+								cursor: 'pointer',
+								color: '#4a4a4a',
+								outline: 'none',
+								fontSize: 16
+							}}
+							value={Product.sortBy.field}
+							onChange={(e) => {
+								Product.sortBy.field = e.target.value;
+							}}
+						>
+							<option value={''}>Sort By</option>
+							{Product.sortOptions.map((option) => (
+								<option key={option} value={option}>
+									{option[0].toUpperCase() + option.slice(1)}
+								</option>
+							))}
+						</select>
+					</div>
+					<div
+						className="column is-paddingless is-unselectable hoverable "
+						style={{}}
+						onClick={(e) => {
+							Product.sortBy.isDesc = !Product.sortBy.isDesc;
+						}}
+					>
+						{Product.sortBy.isDesc ? 'DESC' : 'ASC'}
+					</div>
+				</div>
 				<div className="column box is-marginless is-radiusless ">Search</div>
 				<div className="column box is-marginless is-radiusless ">Add Product</div>
 			</div>

@@ -11,10 +11,15 @@ class Product {
 		isActive: true
 	};
 	nameFilter = { value: '', isActive: true };
-	tagsFilter = { value: [], isActive: false };
+	tagsFilter = { value: [], isActive: true };
 	stockFilter = { value: 0, isActive: false };
 	sizesFilter = { value: [], isActive: false };
-	sortBy = { isDesc: false, field: 'id' };
+	sortBy = { isDesc: false, field: '' };
+	tags = [];
+	sortOptions = [
+		'name',
+		'price'
+	];
 
 	constructor(rootStore) {
 		this.rootStore = rootStore;
@@ -26,6 +31,7 @@ class Product {
 		try {
 			await getAllProducts().then((products) => {
 				this.products = products;
+				this.addNewTags(products);
 			});
 			console.log('Fetch products done');
 		} catch (error) {
@@ -33,13 +39,24 @@ class Product {
 		}
 	};
 
+	addNewTags(products) {
+		products.forEach((product) => {
+			product.tags.forEach((tag) => {
+				if (!this.tags.includes(tag)) {
+					this.tags.push(tag);
+				}
+			});
+		});
+	}
+
 	get filteredProducts() {
-		const filteredProducts = this.products.slice().filter((product) => {
+		let filteredProducts = this.products.slice().filter((product) => {
 			if (!product.name.toLowerCase().includes(this.nameFilter.value.toLowerCase())) {
 				return false;
 			}
 			if (
 				this.tagsFilter.isActive &&
+				this.tagsFilter.value.length > 0 &&
 				!product.tags.some((tag) => this.tagsFilter.value.includes(tag))
 			) {
 				return false;
@@ -80,20 +97,36 @@ class Product {
 			}
 			return true;
 		});
+		if (this.sortBy.field === 'name') {
+			filteredProducts.sort(
+				(a, b) =>
+					this.sortBy.isDesc ? -1 * a.name.localeCompare(b.name) : a.name.localeCompare(b.name)
+			);
+		}
+		else if (this.sortBy.field === 'price') {
+			filteredProducts.sort((a, b) => (this.sortBy.isDesc ? b.price - a.price : a.price - b.price));
+		}
 		window.products = filteredProducts;
 		return filteredProducts;
+	}
+
+	get remainingTags() {
+		return this.tags.filter((tag) => !this.tagsFilter.value.includes(tag));
 	}
 }
 decorate(Product, {
 	products: observable,
+	tags: observable,
 	getAllProducts: action,
 	filteredProducts: computed,
+	remainingTags: computed,
 	priceFilter: observable,
 	nameFilter: observable,
 	tagsFilter: observable,
 	stockFilter: observable,
 	sizesFilter: observable,
-	sortBy: observable
+	sortBy: observable,
+	sortOptions: observable
 });
 
 export default Product;
