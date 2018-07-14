@@ -18,7 +18,8 @@ class Product {
 	tags = [];
 	sortOptions = [
 		'name',
-		'price'
+		'price',
+		'date'
 	];
 
 	constructor(rootStore) {
@@ -97,7 +98,7 @@ class Product {
 			}
 			return true;
 		});
-		if (this.sortBy.field === 'name') {
+		if (this.sortBy.field === 'name' || this.sortBy.field === 'date') {
 			filteredProducts.sort(
 				(a, b) =>
 					this.sortBy.isDesc ? -1 * a.name.localeCompare(b.name) : a.name.localeCompare(b.name)

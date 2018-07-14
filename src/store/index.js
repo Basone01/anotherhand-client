@@ -16,6 +16,7 @@ class RootStore {
 		this.MessengerStore = new MessengerStore(this);
 		this.ShopStore = new ShopStore(this);
 		this.initApp();
+		window.store = this
 	}
 
 	async initApp() {

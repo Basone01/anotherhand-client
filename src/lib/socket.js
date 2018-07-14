@@ -1,7 +1,7 @@
 import IO from 'socket.io-client';
 
 export const initalizeSocket = () => {
-	const socket = IO('/', {
+	const socket = IO({
 		autoConnect: true
 	});
 	return socket;
