@@ -6,14 +6,17 @@ import FilterPanel from './FilterPanel';
 const ProductManager = ({ Product }) => {
 	return (
 		<Fragment>
-			<div className="columns is-marginless is-paddingless is-radiusless box has-text-centered has-text-weight-semibold">
+			<div
+				className="columns is-mobile is-marginless is-paddingless is-radiusless box has-text-centered has-text-weight-semibold"
+				style={{ flexShrink: 0 }}
+			>
 				<div
-					className="column box is-marginless is-radiusless is-one-fifth"
-					style={{ minWidth: 240 }}
+					className="column is-hidden-mobile box is-marginless is-radiusless is-one-fifth"
+					style={{ flex: '0 1 240px' }}
 				>
 					Filter
 				</div>
-				<div className="column columns box is-marginless is-radiusless">
+				<div className="column columns box is-marginless is-radiusless is-mobile">
 					<div className="column is-paddingless is-flex">
 						<select
 							className="has-text-weight-semibold"
@@ -40,8 +43,7 @@ const ProductManager = ({ Product }) => {
 						</select>
 					</div>
 					<div
-						className="column is-paddingless is-unselectable hoverable "
-						style={{}}
+						className="column is-paddingless is-unselectable hoverable"
 						onClick={(e) => {
 							Product.sortBy.isDesc = !Product.sortBy.isDesc;
 						}}

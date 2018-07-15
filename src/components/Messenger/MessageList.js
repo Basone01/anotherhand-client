@@ -18,7 +18,7 @@ class MessageList extends Component {
 				<div
 					ref={this.scrollBox}
 					className=" styled-scrollbar"
-					style={{ overflowY: 'auto', padding: 12 }}
+					style={{ overflowY: 'auto', maxHeight: '75vh', padding: 12 }}
 				>
 					{conversation &&
 						conversation.messaging.map((msg) => (
