@@ -13,10 +13,12 @@ class App extends Component {
 				className="flex"
 				style={{
 					height: '100vh',
-					minWidth: 420
+					maxHeight: '100vh',
+					minWidth: 320,
+					flex:"0 0 100vh"
 				}}
 			>
-				<LoadingSpinner/>
+				<LoadingSpinner />
 				<Header />
 				<ContentLayout>
 					<Switch>

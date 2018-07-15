@@ -1,5 +1,6 @@
 import { observable, action, decorate, computed } from 'mobx';
-import { getMessages, getFacebookProfile,sendMessage } from '../lib/api';
+import { getMessages, getFacebookProfile, sendMessage } from '../lib/api';
+import swal from 'sweetalert2';
 
 class Messenger {
 	rootStore;
@@ -49,10 +50,15 @@ class Messenger {
 
 	onMessageRecieved = async (message) => {
 		let exist = false;
+		let isNotEcho = false;
 		this.conversations.forEach((conversation) => {
 			if (conversation.customer_id === message.customer_id) {
 				exist = true;
 				const messaging = message.messaging || [];
+				if (messaging.find((msg) => msg.sender.id === message.customer_id)) {
+					isNotEcho = true;
+				}
+
 				conversation.time = message.time;
 				conversation.messaging.push(...messaging);
 			}
@@ -66,6 +72,16 @@ class Messenger {
 			this.conversations.unshift({ ...profile, ...message });
 		}
 		this.sortConversationByTime();
+		if (isNotEcho) {
+			swal({
+				toast: true,
+				type: 'info',
+				title: 'You Got A New Message',
+				position: 'top-end',
+				timer: 3000,
+				showConfirmButton: false
+			});
+		}
 	};
 	get timeBasedConversations() {
 		return this.conversations;

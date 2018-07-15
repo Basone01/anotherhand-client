@@ -2,12 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import Sizes from './Sizes';
 import Tags from './Tags';
+import Price from './Price';
+import ProductButtons from './buttons';
 
 const ProductItemWrapper = styled.div.attrs({
 	className: 'columns is-mobile box is-radiusless has-text-weight-semibold'
 })`
 	align-items:center;
 	padding:0.5em 1.5em;
+	@media screen and (max-width:480px){
+		flex-direction:column;
+	}
 `;
 
 const ProductImage = styled.img`
@@ -40,7 +45,10 @@ const ProductItem = ({ product }) => {
 				)}
 				<Tags product={product} />
 			</div>
-			<div className="column is-narrow">฿ {product.price}</div>
+			<div className="columns column is-narrow" style={{alignItems:'center'}}>
+				<Price product={product} />
+				<ProductButtons product={product} />
+			</div>
 		</ProductItemWrapper>
 	);
 };

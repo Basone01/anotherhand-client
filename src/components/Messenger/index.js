@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStore } from '../../store/index';
 import ChatList from './ChatList';
-import ChatBox from './ChatBox';
+import ChatBox from './ChatBox/index';
 
 const Messenger = (props) => {
 	return (
@@ -11,12 +11,12 @@ const Messenger = (props) => {
 				style={{
 					flexBasis: 320,
 					overflowY: 'scroll',
-					overflowX: 'hidden',
+					overflowX: 'hidden'
 				}}
 			>
 				<ChatList />
 			</div>
-			<div className="box column flex">
+			<div className="box column flex" style={{ minHeight: 0 }}>
 				<ChatBox />
 			</div>
 		</div>

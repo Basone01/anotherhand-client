@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStore } from '../../../store';
-import Avatar from '../../common/Avatar';
+import { withStore } from '../../../../store/index';
+import Avatar from '../../../common/Avatar';
 import TextMessage from './text';
 import ImageMessage from './image';
 

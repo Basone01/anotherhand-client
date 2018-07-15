@@ -27,3 +27,18 @@ export const sendMessage = ({ customer_id, token, message }) =>
 		fb_page_token: token,
 		message: message
 	});
+
+export const findProductByImage = ({ pageId, imgUrl }) =>
+	axios
+		.post('/api/products/finder', {
+			fb_page_id: pageId,
+			imgUrl: imgUrl
+		})
+		.then((res) => res.data);
+
+export const sendProduct = ({ customer_id, token, products }) =>
+	axios.post('/api/conversation/send/product', {
+		customer_id: customer_id,
+		fb_page_token: token,
+		products: products
+	});

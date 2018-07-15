@@ -3,6 +3,8 @@ import { getAllProducts } from '../lib/api';
 class Product {
 	rootStore;
 	products = [];
+	markedProductId = [];
+	displayMarked = false;
 	priceFilter = {
 		value: {
 			from: 0,
@@ -50,7 +52,14 @@ class Product {
 		});
 	}
 
+	get markedProducts() {
+		return this.products.slice().filter((p) => this.markedProductId.includes(p._id));
+	}
+
 	get filteredProducts() {
+		if (this.displayMarked) {
+			return this.markedProducts;
+		}
 		let filteredProducts = this.products.slice().filter((product) => {
 			if (!product.name.toLowerCase().includes(this.nameFilter.value.toLowerCase())) {
 				return false;
@@ -100,8 +109,7 @@ class Product {
 		});
 		if (this.sortBy.field === 'name' || this.sortBy.field === 'date') {
 			filteredProducts.sort(
-				(a, b) =>
-					this.sortBy.isDesc ? -1 * a.name.localeCompare(b.name) : a.name.localeCompare(b.name)
+				(a, b) => (this.sortBy.isDesc ? b.name.localeCompare(a.name) : a.name.localeCompare(b.name))
 			);
 		}
 		else if (this.sortBy.field === 'price') {
@@ -120,6 +128,7 @@ decorate(Product, {
 	tags: observable,
 	getAllProducts: action,
 	filteredProducts: computed,
+	markedProducts: computed,
 	remainingTags: computed,
 	priceFilter: observable,
 	nameFilter: observable,
@@ -127,7 +136,9 @@ decorate(Product, {
 	stockFilter: observable,
 	sizesFilter: observable,
 	sortBy: observable,
-	sortOptions: observable
+	sortOptions: observable,
+	markedProductId: observable,
+	displayMarked: observable
 });
 
 export default Product;

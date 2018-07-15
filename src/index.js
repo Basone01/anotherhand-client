@@ -13,7 +13,7 @@ ReactDOM.render(
 		AppState={RootStore.AppStateStore}
 		Messenger={RootStore.MessengerStore}
 		Shop={RootStore.ShopStore}
-	>
+	> 
 		<BrowserRouter>
 			<App />
 		</BrowserRouter>

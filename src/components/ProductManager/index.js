@@ -2,7 +2,8 @@ import React, { Fragment } from 'react';
 import { withStore } from '../../store';
 import ProductList from './ProductList';
 import FilterPanel from './FilterPanel';
-
+import AddIcon from 'react-icons/lib/md/add-circle-outline';
+import CheckIcon from 'react-icons/lib/fa/check';
 const ProductManager = ({ Product }) => {
 	return (
 		<Fragment>
@@ -12,7 +13,7 @@ const ProductManager = ({ Product }) => {
 			>
 				<div
 					className="column is-hidden-mobile box is-marginless is-radiusless is-one-fifth"
-					style={{ flex: '0 1 240px' }}
+					style={{ minWidth: 240 }}
 				>
 					Filter
 				</div>
@@ -51,12 +52,36 @@ const ProductManager = ({ Product }) => {
 						{Product.sortBy.isDesc ? 'DESC' : 'ASC'}
 					</div>
 				</div>
-				<div className="column box is-marginless is-radiusless ">Search</div>
-				<div className="column box is-marginless is-radiusless ">Add Product</div>
+				<div
+					className="column box is-marginless is-radiusless is-narrow-mobile is-inline-flex"
+					style={{
+						alignItems: 'center',
+						justifyContent: 'center',
+						cursor: 'pointer',
+						userSelect: 'none'
+					}}
+					onClick={(e) => (Product.displayMarked = !Product.displayMarked)}
+				>
+					{Product.displayMarked && <CheckIcon />}
+					<span>Marked</span>
+				</div>
+				<div
+					className="column box is-marginless is-radiusless is-narrow-mobile is-inline-flex"
+					style={{
+						alignItems: 'center',
+						justifyContent: 'center',
+						cursor: 'pointer',
+						userSelect: 'none'
+					}}
+					onClick={(e) => console.log(555)}
+				>
+					<AddIcon />
+					<span>Add</span>
+				</div>
 			</div>
 			<div
 				className="columns is-marginless is-paddingless is-radiusless box has-text-centered flex-grow"
-				style={{ flexBasis: 0 }}
+				style={{ flexBasis: 0, minHeight: 0 }}
 			>
 				<FilterPanel />
 				<ProductList />

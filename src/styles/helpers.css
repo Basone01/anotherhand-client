@@ -42,6 +42,10 @@
 	border-radius: 50%;
 }
 
+.img-popup{
+	max-height: 60vh;
+}
+
 @media screen and (min-width: 1088px) {
 	.flex-mobile-block {
 		align-self: stretch;

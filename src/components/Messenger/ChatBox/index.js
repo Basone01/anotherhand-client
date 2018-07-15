@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { withStore } from '../../store';
-import Avatar from '../common/Avatar';
+import { withStore } from '../../../store';
+import Avatar from '../../common/Avatar';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
 
@@ -16,7 +16,7 @@ class ChatBox extends Component {
 	};
 
 	handleEnter = (e) => {
-		if (e.keyCode === 13) {
+		if (e.keyCode === 13&&this.state.message) {
 			this.props.Messenger.sendMessage(this.state.message);
 			this.setState({ message: '' });
 		}
@@ -46,7 +46,7 @@ class ChatBox extends Component {
 		const { Title = '', currentConversation = null } = this.getCurrentConversation();
 
 		return (
-			<div className="flex flex-grow">
+			<div className="flex flex-grow" style={{ minHeight: 0 }}>
 				<div className="box  is-marginless is-radiusless flex-center-all">
 					{currentConversation && (
 						<Avatar src={currentConversation.profile_pic} style={{ marginRight: 8 }} />
