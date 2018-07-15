@@ -20,6 +20,7 @@ class RootStore {
 	}
 
 	async initApp() {
+		this.AppStateStore.isSpinnerDisplay = true;
 		await this.ShopStore.getShopInformation();
 		await this.ProductStore.getAllProducts();
 		await this.MessengerStore.initFacebookAccessData({
@@ -28,6 +29,7 @@ class RootStore {
 		});
 		await this.MessengerStore.getMessages();
 		this.initSocket();
+		this.AppStateStore.isSpinnerDisplay = false;
 	}
 
 	initSocket() {

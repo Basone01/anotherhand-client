@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withStore } from '../../store/index';
 import onClickOutside from 'react-onclickoutside';
+import { Observer } from 'mobx-react';
 const Logo = ({ children, onToggle }) => (
 	<div className="navbar-brand">
 		<a className="navbar-item has-text-weight-bold">{children}</a>
@@ -46,23 +47,27 @@ class Navbar extends Component {
 						<a className="navbar-item">Messages</a>
 					</div>
 					<div className="navbar-end">
-						<a className="navbar-item has-text-weight-bold">
-							{Shop.profilePic && (
-								<img
-									src={Shop.profilePic}
-									alt=""
-									className="img img-rounded"
-									style={{
-										width: 24,
-										height: 24,
-										marginRight: '0.5rem',
-										padding: 2,
-										backgroundColor: 'white'
-									}}
-								/>
+						<Observer>
+							{() => (
+								<a className="navbar-item has-text-weight-bold">
+									{Shop.profilePic && (
+										<img
+											src={Shop.profilePic}
+											alt=""
+											className="img img-rounded"
+											style={{
+												width: 24,
+												height: 24,
+												marginRight: '0.5rem',
+												padding: 2,
+												backgroundColor: 'white'
+											}}
+										/>
+									)}
+									{Shop.name ? Shop.name : 'Login'}
+								</a>
 							)}
-							{Shop.name ? Shop.name : 'Login'}
-						</a>
+						</Observer>
 					</div>
 				</div>
 			</nav>

@@ -4,6 +4,8 @@ import ContentLayout from './components/layout/ContentLayout';
 import Messenger from './components/Messenger/index';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import ProductManager from './components/ProductManager';
+import LoadingSpinner from './components/common/LoadingSpinner';
+
 class App extends Component {
 	render() {
 		return (
@@ -14,6 +16,7 @@ class App extends Component {
 					minWidth: 420
 				}}
 			>
+				<LoadingSpinner/>
 				<Header />
 				<ContentLayout>
 					<Switch>
@@ -28,11 +31,7 @@ class App extends Component {
 							exact
 							component={() => <div className="container has-text-centered">Order</div>}
 						/>
-						<Route
-							path="/product"
-							exact
-							component={ProductManager}
-						/>
+						<Route path="/product" exact component={ProductManager} />
 						<Redirect to="/messenger" />
 					</Switch>
 				</ContentLayout>
