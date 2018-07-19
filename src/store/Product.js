@@ -162,7 +162,6 @@ decorate(Product, {
 	sizesFilter: observable,
 	tagsFilter: observable,
 	stockFilter: observable,
-	sizesFilter: observable,
 	sortBy: observable,
 	sortOptions: observable,
 	markedProductId: observable,
