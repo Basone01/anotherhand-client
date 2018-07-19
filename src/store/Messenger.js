@@ -1,5 +1,5 @@
 import { observable, action, decorate, computed } from 'mobx';
-import { getMessages, getFacebookProfile, sendMessage } from '../lib/api';
+import { getMessages, getFacebookProfile, sendMessage, sendProduct } from '../lib/api';
 import swal from 'sweetalert2';
 
 class Messenger {
@@ -92,6 +92,18 @@ class Messenger {
 			customer_id: this.currentConversationID,
 			token: this.rootStore.ShopStore.token,
 			message: message
+		});
+	};
+
+	sendProductToCurrentConversation = (products) => {
+		if (!products.length) {
+			alert("no marked products!")
+			return;
+		}
+		sendProduct({
+			customer_id: this.currentConversationID,
+			token: this.rootStore.ShopStore.token,
+			products
 		});
 	};
 }

@@ -12,11 +12,11 @@ const PriceFilter = ({ Product }) => {
 							<input
 								className="input"
 								type="number"
-								value={Product.priceFilter.value.from || ''}
+								value={Product.priceFilter.value.min || ''}
 								placeholder="From"
 								min={0}
 								onChange={(e) => {
-									Product.priceFilter.value.from = e.target.value;
+									Product.priceFilter.value.min = e.target.value;
 								}}
 							/>
 						</p>
@@ -26,11 +26,11 @@ const PriceFilter = ({ Product }) => {
 							<input
 								className="input"
 								type="number"
-								value={Product.priceFilter.value.to || ''}
+								value={Product.priceFilter.value.max || ''}
 								placeholder="To"
 								min={0}
 								onChange={(e) => {
-									Product.priceFilter.value.to = e.target.value;
+									Product.priceFilter.value.max = e.target.value;
 								}}
 							/>
 						</p>

@@ -2,11 +2,16 @@ import React from 'react';
 import swal from 'sweetalert2';
 import { withStore } from '../../../../store';
 import { ImageMessagePopUp } from '../../../../lib/sweetAlert';
-const ImageMessage = ({ msg, Shop }) => {
+const AttachmentMessage = ({ msg, Shop }) => {
 	return (
 		<div
 			className="flex-row box"
-			style={{ flexWrap: 'wrap', maxWidth: '60%', wordBreak: 'break-word' }}
+			style={{
+				flexWrap: 'wrap',
+				maxWidth: '60%',
+				wordBreak: 'break-word',
+				padding: '0.5em'
+			}}
 		>
 			{msg.message.attachments.map((attachment, i, self) => {
 				if (attachment.type === 'image') {
@@ -47,4 +52,4 @@ const ImageMessage = ({ msg, Shop }) => {
 	);
 };
 
-export default withStore(ImageMessage, 'Shop');
+export default withStore(AttachmentMessage, 'Shop');

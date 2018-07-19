@@ -2,9 +2,7 @@ import swal from 'sweetalert2';
 import React from 'react';
 import withReactContent from 'sweetalert2-react-content';
 import { findProductByImage, sendProduct } from './api';
-import Sizes from '../components/ProductManager/ProductList/ProductItem/Sizes';
-import Price from '../components/ProductManager/ProductList/ProductItem/Price';
-import ProductItem from '../components/ProductManager/ProductList/ProductItem';
+import { ProductItem } from '../components/ProductManager/ProductList/ProductItem';
 
 const ReactSwal = withReactContent(swal);
 

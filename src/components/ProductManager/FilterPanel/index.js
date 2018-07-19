@@ -3,6 +3,7 @@ import { withStore } from '../../../store';
 import PriceFilter from './PriceFilter';
 import NameFilter from './NameFilter';
 import TagsFilter from './TagsFilter';
+import SizesFilter from './SizesFilter';
 
 const FilterPanel = ({ Product }) => {
 	return (
@@ -13,6 +14,7 @@ const FilterPanel = ({ Product }) => {
 			<NameFilter />
 			<PriceFilter />
 			<TagsFilter />
+			<SizesFilter />
 		</div>
 	);
 };

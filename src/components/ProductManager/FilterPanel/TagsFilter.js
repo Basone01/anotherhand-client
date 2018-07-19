@@ -22,9 +22,9 @@ const TagsFilter = ({ Product }) => {
 				</select>
 			</div>
 			{Product.tagsFilter.value.length > 0 && (
-				<div className="box tags ">
+				<div className="box tags " style={{padding:"0.5em 1em"}}>
 					{Product.tagsFilter.value.map((tag) => (
-						<span key={tag} className="tag has-addons">
+						<span key={tag} className="tag has-addons is-marginless">
 							{tag}
 							<button
 								className="delete is-small"

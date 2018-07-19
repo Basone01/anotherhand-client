@@ -16,10 +16,18 @@ class ChatBox extends Component {
 	};
 
 	handleEnter = (e) => {
-		if (e.keyCode === 13&&this.state.message) {
+		if (e.keyCode === 13 && this.state.message) {
 			this.props.Messenger.sendMessage(this.state.message);
 			this.setState({ message: '' });
 		}
+	};
+	handleSend = (e) => {
+		this.props.Messenger.sendMessage(this.state.message);
+		this.setState({ message: '' });
+	};
+
+	handleSendMarkedProducts = (e) => {
+		this.props.Messenger.sendProductToCurrentConversation(this.props.Product.markedProductId);
 	};
 
 	getCurrentConversation = () => {
@@ -60,6 +68,8 @@ class ChatBox extends Component {
 						value={message}
 						onChange={this.handleInputChage}
 						onKeyUp={this.handleEnter}
+						onSendProduct={this.handleSendMarkedProducts}
+						onSend={this.handleSend}
 					/>
 				)}
 			</div>
@@ -67,6 +77,6 @@ class ChatBox extends Component {
 	}
 }
 
-export const ChatBoxWithStore = withStore(ChatBox, 'Messenger');
+export const ChatBoxWithStore = withStore(ChatBox, 'Messenger', 'Product');
 
 export default ChatBoxWithStore;

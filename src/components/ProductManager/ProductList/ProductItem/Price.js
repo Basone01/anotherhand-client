@@ -4,7 +4,6 @@ const Price = ({ product, className }) => {
 	let price;
 	if (product.sizes.length) {
 		const priceList = product.sizes.map((size) => size.price);
-		console.log(priceList);
 		const min = Math.min(...priceList);
 		const max = Math.max(...priceList);
 		if (min === max) {
