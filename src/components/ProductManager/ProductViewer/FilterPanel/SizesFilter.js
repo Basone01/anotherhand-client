@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStore } from '../../../store';
+import { withStore } from '../../../../store';
 
 const SizesFilter = ({ Product }) => {
 	return (

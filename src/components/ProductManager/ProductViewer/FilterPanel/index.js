@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStore } from '../../../store';
+import { withStore } from '../../../../store/index';
 import PriceFilter from './PriceFilter';
 import NameFilter from './NameFilter';
 import TagsFilter from './TagsFilter';

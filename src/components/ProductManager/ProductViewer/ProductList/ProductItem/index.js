@@ -4,7 +4,7 @@ import Sizes from './Sizes';
 import Tags from './Tags';
 import Price from './Price';
 import ProductButtons from './buttons';
-import { withStore } from '../../../../store';
+import { withStore } from '../../../../../store';
 
 const ProductItemWrapper = styled.div.attrs({
 	className: 'columns is-mobile box is-radiusless has-text-weight-semibold'

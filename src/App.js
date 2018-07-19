@@ -15,7 +15,7 @@ class App extends Component {
 					height: '100vh',
 					maxHeight: '100vh',
 					minWidth: 320,
-					flex:"0 0 100vh"
+					flex: '0 0 100vh'
 				}}
 			>
 				<LoadingSpinner />
@@ -27,13 +27,12 @@ class App extends Component {
 							exact
 							component={() => <div className="container has-text-centered">Overview</div>}
 						/>
-						<Route path="/messenger" exact component={Messenger} />
+						<Route path="/messenger" component={Messenger} />
 						<Route
 							path="/order"
-							exact
 							component={() => <div className="container has-text-centered">Order</div>}
 						/>
-						<Route path="/product" exact component={ProductManager} />
+						<Route path="/product" component={ProductManager} />
 						<Redirect to="/messenger" />
 					</Switch>
 				</ContentLayout>
