@@ -98,3 +98,12 @@
 .hoverable:hover{
 	opacity: 0.5;
 }
+
+@media screen and (max-width: 768px) {
+	.mg-24-is-mobile {
+		margin: 12px 24px 24px 24px !important;
+    }
+    .is-marginless-mobile{
+        margin:0!important
+    }
+}
