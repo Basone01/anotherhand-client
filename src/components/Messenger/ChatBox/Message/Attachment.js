@@ -1,5 +1,4 @@
 import React from 'react';
-import swal from 'sweetalert2';
 import { withStore } from '../../../../store';
 import { ImageMessagePopUp } from '../../../../lib/sweetAlert';
 const AttachmentMessage = ({ msg, Shop }) => {

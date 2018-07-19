@@ -4,7 +4,6 @@ import ProductStore from './Product';
 import MessengerStore from './Messenger';
 import ShopStore from './Shop';
 import { observer, inject } from 'mobx-react';
-import { sendProduct } from '../lib/api';
 
 class RootStore {
 	AppStateStore = null;
@@ -31,11 +30,7 @@ class RootStore {
 		await this.MessengerStore.getMessages();
 		this.initSocket();
 		this.AppStateStore.isSpinnerDisplay = false;
-		// sendProduct({
-		// 	customer_id: this.MessengerStore.conversations[0].customer_id,
-		// 	token: this.ShopStore.token,
-		// 	products: this.ProductStore.products
-		// });
+		
 	}
 
 	initSocket() {

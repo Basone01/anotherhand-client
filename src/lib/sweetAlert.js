@@ -6,7 +6,7 @@ import { ProductItem } from '../components/ProductManager/ProductViewer/ProductL
 
 const ReactSwal = withReactContent(swal);
 
-export const ImageMessagePopUp = ({ url, Shop, conversationID }) =>
+export const ImageMessagePopUp = ({ url, Shop }) =>
 	swal({
 		imageUrl: url,
 		imageAlt: 'attachment',
@@ -28,7 +28,7 @@ export const ImageMessagePopUp = ({ url, Shop, conversationID }) =>
 		if (result.isFound) {
 			console.log(result);
 			const { product } = result;
-			const { name, images, _id } = product;
+			const { _id } = product;
 			ReactSwal.fire({
 				title: 'Found!!',
 				html: <ProductItem product={product} />,

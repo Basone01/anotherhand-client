@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import ProductViewer from './ProductViewer';
 import ProductAddForm from './ProductAddForm';
 export default class ProductManager extends Component {
