@@ -1,5 +1,22 @@
 import { observable, action, decorate, computed } from 'mobx';
 import { getAllProducts } from '../lib/api';
+
+const hasSizes = (product) => product.sizes.length > 0;
+const getTotalStock = (product) => product.sizes.reduce((stock, size) => size.stock + stock, 0);
+const isOutOfStock = (product) => {
+	if (hasSizes(product)) {
+		if (getTotalStock(product) < 1) {
+			return true;
+		}
+	}
+	else {
+		if (product.stock < 1) {
+			return true;
+		}
+	}
+	return false;
+};
+
 class Product {
 	rootStore;
 	products = [];
@@ -7,17 +24,18 @@ class Product {
 	displayMarked = false;
 	priceFilter = {
 		value: {
-			from: 0,
-			to: Infinity
+			min: 0,
+			max: 0
 		},
 		isActive: true
 	};
 	nameFilter = { value: '', isActive: true };
 	tagsFilter = { value: [], isActive: true };
 	stockFilter = { value: 0, isActive: false };
-	sizesFilter = { value: [], isActive: false };
+	sizesFilter = { value: [], isActive: true };
 	sortBy = { isDesc: false, field: '' };
 	tags = [];
+	sizes = [];
 	sortOptions = [
 		'name',
 		'price',
@@ -35,6 +53,7 @@ class Product {
 			await getAllProducts().then((products) => {
 				this.products = products;
 				this.addNewTags(products);
+				this.addNewSizes(products);
 			});
 			console.log('Fetch products done');
 		} catch (error) {
@@ -50,6 +69,18 @@ class Product {
 				}
 			});
 		});
+		this.tags.replace(this.tags.slice().sort());
+	}
+
+	addNewSizes(products) {
+		products.forEach((product) => {
+			product.sizes.forEach((size) => {
+				if (!this.sizes.includes(size.size)) {
+					this.sizes.push(size.size);
+				}
+			});
+		});
+		this.sizes.replace(this.sizes.slice().sort());
 	}
 
 	get markedProducts() {
@@ -72,12 +103,12 @@ class Product {
 				return false;
 			}
 			if (this.priceFilter.isActive) {
-				if (product.sizes.length) {
+				if (hasSizes(product)) {
 					const isInPriceRange = product.sizes.reduce(
 						(isInRange, size) =>
 							isInRange ||
-							(size.price >= this.priceFilter.value.from &&
-								(size.price <= this.priceFilter.value.to || !this.priceFilter.value.to)),
+							(size.price >= this.priceFilter.value.min &&
+								(size.price <= this.priceFilter.value.max || !this.priceFilter.value.max)),
 						false
 					);
 					if (!isInPriceRange) {
@@ -86,24 +117,15 @@ class Product {
 				}
 				else if (
 					!(
-						product.price >= this.priceFilter.value.from &&
-						(product.price <= this.priceFilter.value.to || !this.priceFilter.value.to)
+						product.price >= this.priceFilter.value.min &&
+						(product.price <= this.priceFilter.value.max || !this.priceFilter.value.max)
 					)
 				) {
 					return false;
 				}
 			}
-			if (this.stockFilter.isActive) {
-				if (product.sizes.length) {
-					if (product.sizes.reduce((stock, size) => size.stock + stock, 0) < 1) {
-						return false;
-					}
-				}
-				else {
-					if (product.stock < 1) {
-						return false;
-					}
-				}
+			if (this.stockFilter.isActive && isOutOfStock(product)) {
+				return false;
 			}
 			return true;
 		});
@@ -122,16 +144,22 @@ class Product {
 	get remainingTags() {
 		return this.tags.filter((tag) => !this.tagsFilter.value.includes(tag));
 	}
+	get remainingSizes() {
+		return this.sizes.filter((size) => !this.sizesFilter.value.includes(size));
+	}
 }
 decorate(Product, {
 	products: observable,
+	sizes: observable,
 	tags: observable,
 	getAllProducts: action,
 	filteredProducts: computed,
 	markedProducts: computed,
 	remainingTags: computed,
+	remainingSizes: computed,
 	priceFilter: observable,
 	nameFilter: observable,
+	sizesFilter: observable,
 	tagsFilter: observable,
 	stockFilter: observable,
 	sizesFilter: observable,
