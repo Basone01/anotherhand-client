@@ -29,6 +29,10 @@
 	align-self: stretch;
 }
 
+.flex-ali-center{
+	align-items: center;
+}
+
 .img {
 	object-fit: cover;
 	object-position: center;

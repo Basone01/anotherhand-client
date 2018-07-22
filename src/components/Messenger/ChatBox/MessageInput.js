@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStore } from '../../../store';
 
-const MessageInput = ({ value, onChange, onKeyUp, onSend, onSendProduct }) => {
+const MessageInput = ({ value, onChange, onKeyUp, onSend, onSendProduct,onSetAddress }) => {
 	return (
 		<div className="field has-addons">
 			<div className="control is-expanded">
@@ -32,7 +32,10 @@ const MessageInput = ({ value, onChange, onKeyUp, onSend, onSendProduct }) => {
 						</button>
 					</div>
 					<div className="dropdown-menu" role="menu">
-						<div className="dropdown-content has-text-centered">
+						<div className="dropdown-content">
+							<a className="dropdown-item" onClick={onSetAddress}>
+								Set Address
+							</a>
 							<a className="dropdown-item" onClick={onSendProduct}>
 								Send All Marked
 							</a>

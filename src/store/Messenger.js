@@ -8,7 +8,7 @@ class Messenger {
 	currentConversationID = null;
 	token = '';
 	pageId = '';
-
+	isLoading = false;
 	constructor(rootStore) {
 		this.rootStore = rootStore;
 	}
@@ -19,6 +19,8 @@ class Messenger {
 	}
 
 	async getMessages() {
+		this.isLoading = true;
+
 		console.log('Fetching Messages');
 		try {
 			const messages = await getMessages({
@@ -38,6 +40,7 @@ class Messenger {
 			console.log('Fetch Messages failed');
 			console.log(error.message);
 		}
+		this.isLoading = false;
 	}
 
 	setCurrentConversation = (id) => {
@@ -97,7 +100,7 @@ class Messenger {
 
 	sendProductToCurrentConversation = (products) => {
 		if (!products.length) {
-			alert("no marked products!")
+			alert('no marked products!');
 			return;
 		}
 		sendProduct({
@@ -113,7 +116,8 @@ decorate(Messenger, {
 	setCurrentConversation: action,
 	conversations: observable,
 	currentConversationID: observable,
-	timeBasedConversations: computed
+	timeBasedConversations: computed,
+	isLoading: observable
 });
 
 export default Messenger;

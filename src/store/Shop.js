@@ -8,6 +8,7 @@ class Shop {
 	token = '';
 	profilePic = '';
 	autoReply = false;
+	isLoading = false;
 	constructor(rootStore) {
 		this.rootStore = rootStore;
 	}
@@ -31,11 +32,18 @@ class Shop {
 	}
 
 	toggleAutoReply = async () => {
-		const { data: result } = await toggleAutoReply({ _id: this.shopId });
-		console.log(result);
-		if (result.success) {
-			this.autoReply = result.autoReply;
+		this.isLoading = true;
+
+		try {
+			const { data: result } = await toggleAutoReply({ _id: this.shopId });
+			console.log(result);
+			if (result.success) {
+				this.autoReply = result.autoReply;
+			}
+		} catch (error) {
+			console.log(error.message);
 		}
+		this.isLoading = false;
 	};
 }
 decorate(Shop, {
@@ -43,7 +51,8 @@ decorate(Shop, {
 	toggleAutoReply: action,
 	name: observable,
 	profilePic: observable,
-	autoReply: observable
+	autoReply: observable,
+	isLoading: observable
 });
 
 export default Shop;

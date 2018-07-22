@@ -1,5 +1,7 @@
 import axios from 'axios';
-export const getAllProducts = () => axios.get('/api/products').then((res) => res.data);
+export const getProducts = () => axios.get('/api/products').then((res) => res.data);
+
+export const getOrders = () => axios.get('/api/orders').then((res) => res.data);
 
 export const getShopInformation = () =>
 	axios.get('/api/shop/' + process.env.REACT_APP_DEV_SHOP_ID).then((res) => res.data);
@@ -45,5 +47,16 @@ export const sendProduct = ({ customer_id, token, products }) =>
 
 export const toggleAutoReply = ({ _id }) =>
 	axios.patch('/api/shop/autoreply', {
+		_id
+	});
+
+export const updateOrderStatus = ({ _id, currentStatus }) =>
+	axios.patch('/api/order/status', {
+		_id,
+		currentStatus
+	});
+
+export const cancelOrder = ({ _id }) =>
+	axios.patch('/api/order/cancel', {
 		_id
 	});

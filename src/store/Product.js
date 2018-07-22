@@ -1,5 +1,5 @@
 import { observable, action, decorate, computed } from 'mobx';
-import { getAllProducts } from '../lib/api';
+import { getProducts } from '../lib/api';
 
 const hasSizes = (product) => product.sizes.length > 0;
 const getTotalStock = (product) => product.sizes.reduce((stock, size) => size.stock + stock, 0);
@@ -31,7 +31,7 @@ class Product {
 	};
 	nameFilter = { value: '', isActive: true };
 	tagsFilter = { value: [], isActive: true };
-	stockFilter = { value: 0, isActive: false };
+	stockFilter = { value: 0, isActive: true };
 	sizesFilter = { value: [], isActive: true };
 	sortBy = { isDesc: false, field: '' };
 	tags = [];
@@ -41,16 +41,17 @@ class Product {
 		'price',
 		'date'
 	];
-
+	isLoading = false;
 	constructor(rootStore) {
 		this.rootStore = rootStore;
 		window.productStore = this;
 	}
 
 	getAllProducts = async () => {
+		this.isLoading = true;
 		console.log('Fetching products');
 		try {
-			await getAllProducts().then((products) => {
+			await getProducts().then((products) => {
 				this.products = products;
 				this.addNewTags(products);
 				this.addNewSizes(products);
@@ -59,6 +60,7 @@ class Product {
 		} catch (error) {
 			console.log('Fetch products failed');
 		}
+		this.isLoading = false;
 	};
 
 	addNewTags(products) {
@@ -127,6 +129,18 @@ class Product {
 			if (this.stockFilter.isActive && isOutOfStock(product)) {
 				return false;
 			}
+			if (this.sizesFilter.isActive && this.sizesFilter.value.length) {
+				if (!hasSizes(product)) {
+					return false;
+				}
+				if (
+					product.sizes
+						.filter((size) => size.stock !== 0)
+						.filter((size) => this.sizesFilter.value.includes(size.size)).length === 0
+				) {
+					return false;
+				}
+			}
 			return true;
 		});
 		if (this.sortBy.field === 'name' || this.sortBy.field === 'date') {
@@ -165,7 +179,8 @@ decorate(Product, {
 	sortBy: observable,
 	sortOptions: observable,
 	markedProductId: observable,
-	displayMarked: observable
+	displayMarked: observable,
+	isLoading: observable
 });
 
 export default Product;

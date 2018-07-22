@@ -3,7 +3,7 @@ import { withStore } from '../../../store';
 import Avatar from '../../common/Avatar';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
-
+import swal from 'sweetalert2';
 class ChatBox extends Component {
 	state = {
 		message: ''
@@ -24,6 +24,19 @@ class ChatBox extends Component {
 	handleSend = (e) => {
 		this.props.Messenger.sendMessage(this.state.message);
 		this.setState({ message: '' });
+	};
+
+	handleSetAddress = async () => {
+		const confirm = await swal({
+			title: 'Set Address for this Customer',
+			input: 'textarea'
+		}).then((result) => result.value);
+		if (confirm) {
+			console.log('ok');
+		}
+		else {
+			console.log('NO');
+		}
 	};
 
 	handleSendMarkedProducts = (e) => {
@@ -69,6 +82,7 @@ class ChatBox extends Component {
 						onChange={this.handleInputChage}
 						onKeyUp={this.handleEnter}
 						onSendProduct={this.handleSendMarkedProducts}
+						onSetAddress={this.handleSetAddress}
 						onSend={this.handleSend}
 					/>
 				)}
