@@ -42,3 +42,8 @@ export const sendProduct = ({ customer_id, token, products }) =>
 		fb_page_token: token,
 		products: products
 	});
+
+export const toggleAutoReply = ({ _id }) =>
+	axios.patch('/api/shop/autoreply', {
+		_id
+	});

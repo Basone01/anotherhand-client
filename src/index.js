@@ -14,6 +14,7 @@ ReactDOM.render(
 		AppState={RootStore.AppStateStore}
 		Messenger={RootStore.MessengerStore}
 		Shop={RootStore.ShopStore}
+		Order={RootStore.OrderStore}
 	>
 		<BrowserRouter>
 			<App />

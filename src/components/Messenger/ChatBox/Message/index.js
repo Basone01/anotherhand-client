@@ -2,7 +2,7 @@ import React from 'react';
 import { withStore } from '../../../../store/index';
 import Avatar from '../../../common/Avatar';
 import TextMessage from './text';
-import AttachmentMessage from './Attachment';
+import AttachmentMessage from './attachments';
 
 const Message = ({ msg, Shop, conversation }) => {
 	const isCustomerMessage = msg.sender.id === conversation.customer_id;

@@ -5,6 +5,7 @@ import Messenger from './components/Messenger/index';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import ProductManager from './components/ProductManager';
 import LoadingSpinner from './components/common/LoadingSpinner';
+import OrderManager from './components/OrderManager';
 
 class App extends Component {
 	render() {
@@ -28,10 +29,7 @@ class App extends Component {
 							component={() => <div className="container has-text-centered">Overview</div>}
 						/>
 						<Route path="/messenger" component={Messenger} />
-						<Route
-							path="/order"
-							component={() => <div className="container has-text-centered">Order</div>}
-						/>
+						<Route path="/order" component={OrderManager} />
 						<Route path="/product" component={ProductManager} />
 						<Redirect to="/messenger" />
 					</Switch>

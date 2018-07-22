@@ -16,7 +16,7 @@ const Messenger = (props) => {
 			>
 				<ChatList />
 			</div>
-			<div className="box column flex" style={{ minHeight: 0 }}>
+			<div className="box column flex" style={{ minHeight: 0,overflowX: 'hidden' }}>
 				<ChatBox />
 			</div>
 		</div>

@@ -3,18 +3,22 @@ import AppStateStore from './AppState';
 import ProductStore from './Product';
 import MessengerStore from './Messenger';
 import ShopStore from './Shop';
+import OrderStore from './Order';
 import { observer, inject } from 'mobx-react';
 
 class RootStore {
 	AppStateStore = null;
 	ProductStore = null;
+	MessengerStore = null;
 	ShopStore = null;
+	OrderStore = null;
 	socket = null;
 	constructor() {
 		this.AppStateStore = new AppStateStore(this);
 		this.ProductStore = new ProductStore(this);
 		this.MessengerStore = new MessengerStore(this);
 		this.ShopStore = new ShopStore(this);
+		this.OrderStore = new OrderStore(this);
 		this.initApp();
 		window.store = this;
 	}
@@ -30,7 +34,6 @@ class RootStore {
 		await this.MessengerStore.getMessages();
 		this.initSocket();
 		this.AppStateStore.isSpinnerDisplay = false;
-		
 	}
 
 	initSocket() {

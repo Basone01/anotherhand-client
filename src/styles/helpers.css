@@ -15,7 +15,8 @@
 	align-items: center;
 }
 
-.flex-center-all,.flex-row-center-all {
+.flex-center-all,
+.flex-row-center-all {
 	justify-content: center;
 }
 
@@ -42,7 +43,7 @@
 	border-radius: 50%;
 }
 
-.img-popup{
+.img-popup {
 	max-height: 60vh;
 }
 
@@ -91,19 +92,24 @@
 	background: #555;
 }
 
-.hoverable{
+.hoverable {
 	cursor: pointer;
+	transition: opacity 0.3s;
 }
 
-.hoverable:hover{
+.hoverable:hover {
 	opacity: 0.5;
 }
 
 @media screen and (max-width: 768px) {
 	.mg-24-is-mobile {
 		margin: 12px 24px 24px 24px !important;
-    }
-    .is-marginless-mobile{
-        margin:0!important
-    }
+	}
+	.is-marginless-mobile {
+		margin: 0 !important;
+	}
+}
+
+.self-stretch {
+	align-self: stretch;
 }

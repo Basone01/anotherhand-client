@@ -43,12 +43,19 @@ class Navbar extends Component {
 			<nav className="navbar is-link" aria-label="main navigation">
 				<Logo onToggle={this.onToggle}>AnotherHand</Logo>
 				<div className={`navbar-menu ${isActive && 'is-active'}`}>
-					<div className="navbar-start">
-						<a className="navbar-item">Messages</a>
-					</div>
-					<div className="navbar-end">
-						<Observer>
-							{() => (
+					<Observer>
+						{() => (
+							<div className="navbar-end">
+								{Shop.shopId && (
+									<a className="navbar-item has-text-weight-bold">
+										<div className="tags has-addons" onClick={() => Shop.toggleAutoReply()}>
+											<span className="tag">Auto Reply</span>
+											<span className={`tag ${Shop.autoReply ? 'is-success' : 'is-info'}`}>
+												{Shop.autoReply ? 'ON' : 'OFF'}
+											</span>
+										</div>
+									</a>
+								)}
 								<a className="navbar-item has-text-weight-bold">
 									{Shop.profilePic && (
 										<img
@@ -66,9 +73,9 @@ class Navbar extends Component {
 									)}
 									{Shop.name ? Shop.name : 'Login'}
 								</a>
-							)}
-						</Observer>
-					</div>
+							</div>
+						)}
+					</Observer>
 				</div>
 			</nav>
 		);
